@@ -1,4 +1,4 @@
-public static void insertTables(String name)
+public static void insertTables(String name,String password)
 	{
 		Statement statement=null;
 		Connection connection=null;
@@ -6,7 +6,7 @@ public static void insertTables(String name)
 		{
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://127.0.0.1:5432/"+name, "postgres",
-					"shamsserver");
+					password);
 			statement = connection.createStatement();
 			if(name.equals("schema1"))
 			{
@@ -78,7 +78,7 @@ public static void insertTables(String name)
 			e.printStackTrace();
 		}
 	}
-	public static void refreshSchema(String name)
+	public static void refreshSchema(String name,String password)
 	{
 		Statement statement=null;
 		Connection connection=null;
@@ -87,7 +87,7 @@ public static void insertTables(String name)
 		{
 			connection = DriverManager.getConnection(
 					"jdbc:postgresql://127.0.0.1:5432/postgres", "postgres",
-					"shamsserver");
+					password);
 		}
 		catch (SQLException e) {System.err.println("Failed to establish connection to postgres local server.");}
 		//delete old database and create new one
@@ -114,5 +114,5 @@ public static void insertTables(String name)
 		//insert the tables to fresh database and close the connection
 		try {connection.close();}
 		catch (SQLException e){System.err.println("Failed to Close Connection");}
-		insertTables(name);
+		insertTables(name,password);
 	}
